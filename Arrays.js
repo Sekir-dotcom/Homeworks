@@ -21,3 +21,20 @@ console.log("Array copiado dentro de el mismo: " + copiar);
 entradas = numeros.entries();
 console.log("Entradas hechas en el array: " + entradas);
 
+positivos = numeros.every((num) => num > 0);
+console.log ("Todos los numeros son positivos?" + positivos);
+
+llenar = numeros.fill(0, 2, 5);
+console.log("Array con elementos llenados: " + llenar);
+
+filtro = numeros.filter((num) => num % 2 === 0);
+console.log("Array con filtros: " + filtro);
+
+encontrar = numeros.find ((num) => num < 4)
+console.log("Numero menor a 4:" + encontrar)
+
+encontrarIndice = numeros.findIndex((num) => num === 2);
+console.log("Indice del numero 2:" + encontrarIndice);
+
+encontrarUltimo = numeros.findLast((num) => num === 10);
+console.log( + encontrarUltimo);
