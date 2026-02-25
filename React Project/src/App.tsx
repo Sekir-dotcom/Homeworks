@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import ListaContactos from './ListaContactos';
+
+interface Contacto {
+  id: number;
+  nombre: string;
+  telefono: string;
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [loading, setLoading] = useState(true);
+  const [contactos, setContactos] = useState<Contacto[]>([]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setContactos([
+        { id: 1, nombre: 'Juan', telefono: '123456789' },
+        { id: 2, nombre: 'María', telefono: '987654321' },
+        { id: 3, nombre: 'Pedro', telefono: '555555555' },
+      ]);
+      setLoading(false);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const agregarContacto = () => {
+    if (nombre.trim() === '' || telefono.trim() === '') return;
+
+    const nuevoContacto: Contacto = {
+      id: contactos.length + 1,
+      nombre: nombre,
+      telefono: telefono,
+    };
+
+    setContactos([...contactos, nuevoContacto]);
+    setNombre('');
+    setTelefono('');
+  };
+
+  const eliminarContacto = (id: number) => {
+    const nuevosContactos = contactos.filter( c => c.id !== id);
+    setContactos(nuevosContactos);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="container">
+      <h1>Agenda de Contactos</h1>
+
+      {loading ? (
+        <h1>Cargando contactos...</h1>
+      ) : (
+        <ListaContactos contactos={contactos} eliminarContacto={eliminarContacto} />
+      )}
+      </>
+    );
+  }
+
+
+
 
 export default App
