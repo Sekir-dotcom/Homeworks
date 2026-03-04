@@ -1,9 +1,9 @@
-export default class Node<T> {
-  value: T;
-  next: Node<T> | null;
+export class Nodo<T> {
+  data: T;
+  next: Nodo<T> | null = null;
+  prev: Nodo<T> | null = null;
 
-  constructor(value: T) {
-    this.value = value;
-    this.next = null;
+  constructor(data: T) {
+    this.data = data;
   }
 }

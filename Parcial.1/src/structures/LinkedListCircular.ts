@@ -22,7 +22,7 @@ export default class CircularLinkedList<T> {
       newNode.next = newNode; // se apunta a sí mismo
         this.current = newNode;
     } else {
-       let tail = this.head;
+        let tail = this.head;
 
         while (tail.next !== this.head) {
         tail = tail.next!;

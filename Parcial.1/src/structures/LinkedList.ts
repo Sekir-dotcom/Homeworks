@@ -1,13 +1,13 @@
-import Node from "./nodo";
+import { Nodo } from "./nodo";
 
 export default class LinkedList<T> {
 
-    head: Node<T> | null = null;
-    tail: Node<T> | null = null;
+    head: Nodo<T> | null = null;
+    tail: Nodo<T> | null = null;
     length: number = 0;
 
     append(value: T): void {
-    const newNode = new Node(value);
+    const newNode = new Nodo(value);
 
     if (!this.head) {
         this.head = newNode;
@@ -31,7 +31,7 @@ export default class LinkedList<T> {
     }
 
     this.length--;
-    return removed.value;
+    return removed.data; // ✅ CAMBIO
     }
 
     toArray(): T[] {
@@ -39,7 +39,7 @@ export default class LinkedList<T> {
     let current = this.head;
 
     while (current) {
-        arr.push(current.value);
+      arr.push(current.data); // ✅ CAMBIO
         current = current.next;
     }
 

@@ -1,50 +1,46 @@
-class CDNode<T> {
-    value: T;
-    next: CDNode<T> | null = null;
-    prev: CDNode<T> | null = null;
-
-    constructor(value: T) {
-    this.value = value;
-    }
-}
+import { Nodo } from "./nodo";
 
 export default class CircularDoublyLinkedList<T> {
 
-    head: CDNode<T> | null = null;
-    length: number = 0;
+    head: Nodo<T> | null = null;
+    current: Nodo<T> | null = null;
 
     append(value: T): void {
-    const newNode = new CDNode(value);
+
+    const newNode = new Nodo(value);
 
     if (!this.head) {
         this.head = newNode;
         newNode.next = newNode;
         newNode.prev = newNode;
-    } else {
-        const tail = this.head.prev!;
-
-        tail.next = newNode;
-        newNode.prev = tail;
-
-        newNode.next = this.head;
-        this.head.prev = newNode;
+        this.current = newNode;
+        return;
     }
 
-    this.length++;
+    const tail = this.head.prev!;
+
+    tail.next = newNode;
+    newNode.prev = tail;
+
+    newNode.next = this.head;
+    this.head.prev = newNode;
     }
 
-    toArray(): T[] {
-    const arr: T[] = [];
+    next(): T | null {
+    if (!this.current) return null;
 
-    if (!this.head) return arr;
+    this.current = this.current.next!;
+    return this.current.data;
+    }
 
-    let current = this.head;
+    prev(): T | null {
+    if (!this.current) return null;
 
-    do {
-        arr.push(current.value);
-        current = current.next!;
-    } while (current !== this.head);
+    this.current = this.current.prev!;
+    return this.current.data;
+    }
 
-    return arr;
+    getCurrent(): T | null {
+    return this.current ? this.current.data : null;
     }
 }
