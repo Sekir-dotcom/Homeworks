@@ -62,36 +62,54 @@ function LoginPage() {
     );
 }
 
-function MenuPage() {
-    const auth = useAuth();
-    const navigate = useNavigate();
+function UserInfo() {
+  const auth = useAuth();
+  if (!auth.userEmail) return null;
 
-    return (
-        <div className="menu-panel">
-            <h1>Bienvenido</h1>
-            <p>Selecciona un desafío</p>
-            <div>
-                <button onClick={() => navigate("/challenge4")} style={{ marginRight: 10 }}>
-                    Challenge 4
-                </button>
-                <button onClick={() => navigate("/challenge5")}>Challenge 5</button>
-            </div>
-            <div style={{ marginTop: 20 }}>
-                <button
-                    onClick={() => {
-                        auth.logout();
-                        navigate("/login", { replace: true });
-                    }}
-                >
-                    Cerrar sesión
-                </button>
-            </div>
-        </div>
-    );
+  return <div className="user-tag">Usuario: {auth.userEmail}</div>;
+}
+
+function MenuPage() {
+  const auth = useAuth();
+  const navigate = useNavigate();
+
+  return (
+    <div className="menu-panel">
+      <UserInfo />
+      <h1>Bienvenido</h1>
+      <p>Selecciona un desafío</p>
+      <div>
+        <button onClick={() => navigate("/challenge4")} style={{ marginRight: 10 }}>
+          Challenge 4
+        </button>
+        <button onClick={() => navigate("/challenge5")}>Challenge 5</button>
+      </div>
+      <div style={{ marginTop: 20 }}>
+        <button
+          onClick={() => {
+            auth.logout();
+            navigate("/login", { replace: true });
+          }}
+        >
+          Cerrar sesión
+        </button>
+      </div>
+    </div>
+  );
 }
 
 function ChallengeWrapper({ children }: { children: React.ReactNode }) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  return (
+    <div style={{ padding: 20, position: "relative" }}>
+      <UserInfo />
+      <button onClick={() => navigate("/menu")} style={{ marginBottom: 12 }}>
+        Volver
+      </button>
+      {children}
+    </div>
+  );
 
     return (
         <div style={{ padding: 20 }}>
