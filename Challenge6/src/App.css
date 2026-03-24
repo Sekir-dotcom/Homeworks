@@ -1,0 +1,97 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #f7f9fb;
+}
+
+#root {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.login-card {
+  max-width: 380px;
+  margin: 40px auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.08);
+  padding: 22px;
+}
+
+.login-card h1 {
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  color: #333;
+  text-align: center;
+}
+
+.login-card form > div {
+  margin-bottom: 14px;
+}
+
+.login-card label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #444;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #c4cdd8;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.login-card button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #1976d2;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.login-card button:hover {
+  background-color: #115293;
+}
+
+.menu-panel {
+  max-width: 500px;
+  margin: 40px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.08);
+}
+
+.menu-panel h1 {
+  margin-bottom: 16px;
+  color: #333;
+  text-align: center;
+}
+
+.menu-panel button {
+  margin: 0 8px 10px 0;
+}
+
+.error-message {
+  margin-top: 12px;
+  color: #b00020;
+  font-size: 0.9rem;
+}
+
+.hint-text {
+  margin-top: 12px;
+  color: #666;
+  font-size: 0.8rem;
+}
