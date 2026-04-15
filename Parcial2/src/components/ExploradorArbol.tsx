@@ -1,19 +1,19 @@
-import type { TreeNode } from '../models/tree'
-import TreeNodeItem  from './TreeNodeItem'
+import type { NodoArbol as NodoArbolType } from '../models/arbol'
+import NodoArbolComp from './NodoArbol'
 
-type TreeExplorerProps = {
-  root: TreeNode
+type ExploradorArbolProps = {
+  raiz: NodoArbolType
   expandedIds: string[]
   selectedId: string
   onToggle: (nodeId: string) => void
   onSelect: (nodeId: string) => void
 }
 
-const TreeExplorer = ({ root, expandedIds, selectedId, onToggle, onSelect }: TreeExplorerProps) => {
+const ExploradorArbol = ({ raiz, expandedIds, selectedId, onToggle, onSelect }: ExploradorArbolProps) => {
   return (
     <div className="tree-explorer">
-      <TreeNodeItem
-        node={root}
+      <NodoArbolComp
+        nodo={raiz}
         depth={0}
         expandedIds={expandedIds}
         selectedId={selectedId}
@@ -24,4 +24,4 @@ const TreeExplorer = ({ root, expandedIds, selectedId, onToggle, onSelect }: Tre
   )
 }
 
-export default TreeExplorer
+export default ExploradorArbol

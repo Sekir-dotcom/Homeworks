@@ -1,8 +1,8 @@
-import { isFolderNode } from '../models/tree'
-import type { TreeNode } from '../models/tree'
+import { esCarpetaNodo } from '../models/arbol'
+import type { NodoArbol } from '../models/arbol'
 
-type TreeNodeItemProps = {
-  node: TreeNode
+type NodoArbolProps = {
+  nodo: NodoArbol
   depth: number
   expandedIds: string[]
   selectedId: string
@@ -10,25 +10,25 @@ type TreeNodeItemProps = {
   onSelect: (nodeId: string) => void
 }
 
-const TreeNodeItem = ({ node, depth, expandedIds, selectedId, onToggle, onSelect }: TreeNodeItemProps) => {
-  const isFolder = isFolderNode(node)
-  const isExpanded = expandedIds.includes(node.id)
-  const isSelected = selectedId === node.id
+const NodoArbolComp = ({ nodo, depth, expandedIds, selectedId, onToggle, onSelect }: NodoArbolProps) => {
+  const esCarpeta = esCarpetaNodo(nodo)
+  const isExpanded = expandedIds.includes(nodo.id)
+  const isSelected = selectedId === nodo.id
 
-  const handleTitleClick = () => {
-    onSelect(node.id)
+  const handleClick = () => {
+    onSelect(nodo.id)
   }
 
   return (
     <div className={`tree-node ${isSelected ? 'selected' : ''}`} style={{ paddingLeft: `${depth * 18}px` }}>
-      <div className="tree-node-row" onClick={handleTitleClick}>
-        {isFolder ? (
+      <div className="tree-node-row" onClick={handleClick}>
+        {esCarpeta ? (
           <button
             type="button"
             className="toggle-button"
             onClick={(event) => {
               event.stopPropagation()
-              onToggle(node.id)
+              onToggle(nodo.id)
             }}
           >
             {isExpanded ? '▾' : '▸'}
@@ -36,20 +36,20 @@ const TreeNodeItem = ({ node, depth, expandedIds, selectedId, onToggle, onSelect
         ) : (
           <span className="file-icon">•</span>
         )}
-        <span className="tree-node-name">{node.name}</span>
-        <span className="tree-node-meta">{node.type}</span>
+        <span className="tree-node-name">{nodo.name}</span>
+        <span className="tree-node-meta">{nodo.type}</span>
       </div>
 
       <div className="tree-node-details">
-        <small>Creado por: {node.createdBy}</small>
+        <small>Creado por: {nodo.createdBy}</small>
       </div>
 
-      {isFolder && isExpanded && (
+      {esCarpeta && isExpanded && (
         <div className="tree-node-children">
-          {node.children.map((child) => (
-            <TreeNodeItem
-              key={child.id}
-              node={child}
+          {nodo.children.map((hijo) => (
+            <NodoArbolComp
+              key={hijo.id}
+              nodo={hijo}
               depth={depth + 1}
               expandedIds={expandedIds}
               selectedId={selectedId}
@@ -63,4 +63,4 @@ const TreeNodeItem = ({ node, depth, expandedIds, selectedId, onToggle, onSelect
   )
 }
 
-export default TreeNodeItem
+export default NodoArbolComp

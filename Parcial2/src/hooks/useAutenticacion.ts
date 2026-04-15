@@ -6,7 +6,7 @@ import {
   signOut,
 } from 'firebase/auth'
 import type { User } from 'firebase/auth'
-import { auth } from '../firebase/config'
+import { auth } from '../firebase/configFirebase'
 
 export type AuthState = {
   user: User | null
@@ -17,7 +17,7 @@ export type AuthState = {
   logout: () => Promise<void>
 }
 
-export const useAuth = (): AuthState => {
+export const useAutenticacion = (): AuthState => {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)

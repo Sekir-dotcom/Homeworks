@@ -1,8 +1,8 @@
 import { type ReactElement } from 'react'
 import { Navigate } from 'react-router-dom'
-import { useAuthContext } from '../context/AuthContext'
+import { useAuthContext } from '../context/ContextoAuth'
 
-const ProtectedRoute = ({ children }: { children: ReactElement }) => {
+const RutaProtegida = ({ children }: { children: ReactElement }) => {
   const { user, loading } = useAuthContext()
 
   if (loading) {
@@ -16,4 +16,4 @@ const ProtectedRoute = ({ children }: { children: ReactElement }) => {
   return children
 }
 
-export default ProtectedRoute
+export default RutaProtegida

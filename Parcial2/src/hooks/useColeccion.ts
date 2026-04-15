@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
 import { doc, getDoc, onSnapshot, setDoc } from 'firebase/firestore'
-import { db } from '../firebase/config'
+import { db } from '../firebase/configFirebase'
 
-export const useCollection = <T extends Record<string, unknown> = Record<string, unknown>>() => {
+export const useColeccion = <T extends Record<string, unknown> = Record<string, unknown>>() => {
   const getDocument = useCallback(
     async (collectionName: string, documentId: string): Promise<T | null> => {
       const reference = doc(db, collectionName, documentId)

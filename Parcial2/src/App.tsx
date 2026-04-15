@@ -1,16 +1,16 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { AuthProvider } from './context/AuthContext'
-import { TreeProvider } from './context/TreeContext'
-import ExplorerPage from './pages/ExplorerPage'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
-import ProtectedRoute from './components/ProtectedRoute'
+import { AuthProvider } from './context/ContextoAuth'
+import { ArbolProvider } from './context/ContextoArbol'
+import Explorador from './pages/Explorador'
+import LoginPage from './pages/Login'
+import RegisterPage from './pages/Registro'
+import RutaProtegida from './components/RutaProtegida'
 import './App.scss'
 
 const App = () => {
   return (
     <AuthProvider>
-      <TreeProvider>
+      <ArbolProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Navigate to="/explorer" replace />} />
@@ -19,15 +19,15 @@ const App = () => {
             <Route
               path="/explorer"
               element={
-                <ProtectedRoute>
-                  <ExplorerPage />
-                </ProtectedRoute>
+                <RutaProtegida>
+                  <Explorador />
+                </RutaProtegida>
               }
             />
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </BrowserRouter>
-      </TreeProvider>
+      </ArbolProvider>
     </AuthProvider>
   )
 }

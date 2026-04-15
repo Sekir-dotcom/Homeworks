@@ -17,3 +17,5 @@ const auth = getAuth(app)
 const db = getFirestore(app)
 
 export { app, auth, db }
+
+//Me daba errores no se de que, tuve que cambiarlo a .ts

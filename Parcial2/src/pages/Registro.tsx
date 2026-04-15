@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuthContext } from '../context/AuthContext'
+import { useAuthContext } from '../context/ContextoAuth'
 
 const RegisterPage = () => {
   const { user, register, loading, error } = useAuthContext()
   const navigate = useNavigate()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [correo, setCorreo] = useState('')
+  const [contrasena, setContrasena] = useState('')
 
   useEffect(() => {
     if (user) {
@@ -17,7 +17,7 @@ const RegisterPage = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    await register(email, password)
+    await register(correo, contrasena)
   }
 
   return (
@@ -29,8 +29,8 @@ const RegisterPage = () => {
             Correo
             <input
               type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              value={correo}
+              onChange={(event) => setCorreo(event.target.value)}
               required
               placeholder="usuario@correo.com"
             />
@@ -39,8 +39,8 @@ const RegisterPage = () => {
             Contraseña
             <input
               type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              value={contrasena}
+              onChange={(event) => setContrasena(event.target.value)}
               required
               placeholder="********"
             />
